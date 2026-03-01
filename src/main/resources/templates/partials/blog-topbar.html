@@ -1,0 +1,90 @@
+<html>
+
+<body>
+	<div th:fragment="topbar" th:remove="tag">
+		<header id="page-topbar" class="blog-header">
+			<div class="layout-width">
+				<div class="navbar-header">
+					<div class="d-flex align-items-center justify-content-between w-100">
+						<div class="d-flex align-items-center flex-grow-1">
+							<!-- LOGO & BLOG TITLE -->
+							<div class="navbar-brand-box horizontal-logo d-flex align-items-center">
+								<a href="/" class="logo d-flex align-items-center text-decoration-none">
+									<i class="ri-code-s-slash-line fs-24 text-white me-2"></i>
+									<div class="d-none d-md-block">
+										<h4 class="mb-0 text-white fw-bold">FV<span class="text-warning">THREE</span></h4>
+										<small class="text-white-50" style="font-size: 0.7rem; margin-top: -5px;">Tech • Life • Tips</small>
+									</div>
+								</a>
+							</div>
+
+							<!-- Navigation Menu -->
+							<nav class="d-none d-lg-flex ms-4">
+								<ul class="nav nav-pills mb-0">
+									<li class="nav-item">
+										<a class="nav-link" href="/" th:classappend="${#httpServletRequest.requestURI == '/'} ? 'active' : ''">
+											<i class="ri-home-4-line me-1"></i> Home
+										</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" href="/category/tech" th:classappend="${#strings.contains(#httpServletRequest.requestURI, '/category/tech')} ? 'active' : ''">
+											<i class="ri-code-box-line me-1"></i> Tech
+										</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" href="/category/life" th:classappend="${#strings.contains(#httpServletRequest.requestURI, '/category/life')} ? 'active' : ''">
+											<i class="ri-heart-pulse-line me-1"></i> Life
+										</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" href="/category/tips" th:classappend="${#strings.contains(#httpServletRequest.requestURI, '/category/tips')} ? 'active' : ''">
+											<i class="ri-lightbulb-line me-1"></i> Tips
+										</a>
+									</li>
+								</ul>
+							</nav>
+						</div>
+
+						<!-- Right side elements -->
+						<div class="d-flex align-items-center gap-2">
+							<!-- App Search Desktop -->
+							<form class="app-search d-none d-md-block" action="/search" method="get">
+								<div class="position-relative">
+									<input type="text" class="form-control" name="q" placeholder="Search articles..." autocomplete="off" id="search-options" value="">
+									<span class="mdi mdi-magnify search-widget-icon"></span>
+								</div>
+							</form>
+
+							<!-- Mobile Search Dropdown -->
+							<div class="dropdown d-md-none topbar-head-dropdown header-item">
+								<button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle" id="page-header-search-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<i class="bx bx-search fs-22 text-white"></i>
+								</button>
+								<div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0" aria-labelledby="page-header-search-dropdown">
+									<form class="p-3" action="/search" method="get">
+										<div class="form-group m-0">
+											<div class="input-group">
+												<input type="text" name="q" class="form-control" placeholder="Search articles..." aria-label="Search">
+												<button class="btn btn-primary" type="submit"><i class="mdi mdi-magnify"></i></button>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+
+							<!-- Dark Mode Toggle -->
+							<div class="ms-1 header-item d-none d-sm-flex">
+								<button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle light-dark-mode">
+									<i class='bx bx-moon fs-22 text-white'></i>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+	</div>
+</body>
+
+</html>
+

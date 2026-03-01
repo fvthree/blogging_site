@@ -1,0 +1,62 @@
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+
+### Copilot ###
+.github/copilot/
+**/copilot/
+copilot/
+
+### Application Properties ###
+# Don't commit local configuration (contains local database credentials)
+src/main/resources/application.properties
+# Keep Docker configuration (can be safely committed)
+!src/main/resources/application-docker.properties
+
+### Logs ###
+logs/
+*.log
+
+### Docker ###
+# Don't commit local docker volumes data
+postgres_data/
+
+### Backup Files ###
+*.sql
+backup*.sql
+
+### Mapbox/API Keys ###
+# Don't commit files with actual API tokens
+src/main/resources/static/assets/js/pages/leaflet-map-config.js
+**/leaflet-map-config.js
+

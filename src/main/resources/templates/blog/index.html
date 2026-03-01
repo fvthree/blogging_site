@@ -1,0 +1,157 @@
+<html lang="en" xmlns="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{blog-layout}">
+
+<th:block>
+	<!--page title-->
+	<div th:replace="partials/title-meta :: title-meta(${pageTitle})"></div>
+</th:block>
+
+<section layout:fragment="content">
+
+	<div class="row">
+		<div class="col-lg-8">
+			<!-- Blog Posts List -->
+			<div class="blog-posts">
+				<div class="d-flex justify-content-between align-items-center mb-4">
+					<h3 class="mb-0 fw-bold tech-text-gradient">Latest Articles</h3>
+					<span class="badge bg-light text-dark" th:if="${posts != null}">
+						<th:block th:text="${posts.getTotalElements()}"></th:block> posts
+					</span>
+				</div>
+
+				<div th:if="${posts != null and !posts.isEmpty()}">
+					<ul class="list-unstyled">
+						<li th:each="post : ${posts}" class="mb-3">
+							<div class="d-flex justify-content-between align-items-start">
+								<div class="flex-grow-1">
+									<div class="d-flex align-items-center gap-2 mb-2">
+										<span th:if="${post.category != null}"
+											  class="badge bg-primary"
+											  th:classappend="${post.category.slug == 'tech'} ? 'tech-badge' : (${post.category.slug == 'life'} ? 'life-badge' : 'tips-badge')"
+											  th:text="${post.category.name}"></span>
+										<small class="text-muted">
+											<i class="ri-calendar-line"></i>
+											<th:block th:text="${#temporals.format(post.publishedAt, 'd MMM yyyy')}"></th:block>
+										</small>
+									</div>
+									<h5 class="mb-2">
+										<a th:href="@{/post/{slug}(slug=${post.slug})}" class="text-decoration-none post-title-link" th:text="${post.title}"></a>
+									</h5>
+									<p class="text-muted mb-3" th:text="${post.excerpt}"></p>
+									<div class="d-flex flex-wrap gap-3 align-items-center">
+										<small class="text-muted">
+											<i class="ri-eye-line"></i>
+											<th:block th:text="${post.viewCount}"></th:block> views
+										</small>
+										<small class="text-muted">
+											<i class="ri-user-line"></i>
+											<th:block th:text="${post.author.getFullName()}"></th:block>
+										</small>
+									</div>
+								</div>
+								<a th:href="@{/post/{slug}(slug=${post.slug})}" class="btn btn-sm btn-outline-primary ms-3 read-btn">
+									<i class="ri-arrow-right-line"></i> Read
+								</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div th:if="${posts == null or posts.isEmpty()}" class="alert alert-info border-0 shadow-sm">
+					<div class="text-center py-4">
+						<i class="ri-file-list-3-line fs-48 text-primary mb-3 d-block"></i>
+						<h5>No posts yet!</h5>
+						<p class="mb-0">Check back soon for new content about tech, life, and tips.</p>
+					</div>
+				</div>
+			</div>
+
+		<!-- Pagination -->
+		<div th:if="${posts != null and posts.getTotalPages() > 1}" class="d-flex justify-content-between align-items-center mt-5 pagination">
+			<a th:if="${posts.hasPrevious()}"
+			   th:href="@{/(page=${posts.getNumber()})}"
+			   class="btn btn-outline-secondary btn-sm">
+			   <i class="ri-arrow-left-line"></i> Previous
+			</a>
+			<span class="text-muted small fw-bold">
+				Page <span th:text="${posts.getNumber() + 1}"></span> of <span th:text="${posts.getTotalPages()}"></span>
+			</span>
+			<a th:if="${posts.hasNext()}"
+			   th:href="@{/(page=${posts.getNumber() + 2})}"
+			   class="btn btn-outline-secondary btn-sm">
+			   Next <i class="ri-arrow-right-line"></i>
+			</a>
+		</div>
+		</div>
+
+		<!-- Sidebar -->
+		<div class="col-lg-4">
+			<!-- About Me -->
+			<div class="card border-0 shadow-sm mb-4">
+				<div class="card-header">
+					<h6 class="card-title mb-0"><i class="ri-user-smile-line me-2"></i>About</h6>
+				</div>
+				<div class="card-body">
+					<p class="mb-0 small">Welcome to my corner of the internet! I share insights on technology, personal experiences, and helpful tips to make life easier.</p>
+				</div>
+			</div>
+
+			<!-- Categories -->
+			<div class="card border-0 shadow-sm mb-4">
+				<div class="card-header">
+					<h6 class="card-title mb-0"><i class="ri-folder-line me-2"></i>Categories</h6>
+				</div>
+				<div class="card-body">
+					<ul class="list-unstyled mb-0">
+						<li th:each="category : ${categories}" class="mb-2">
+							<a th:href="@{/category/{slug}(slug=${category.slug})}"
+							   class="text-decoration-none small d-flex justify-content-between align-items-center">
+								<span>
+									<i th:if="${category.slug == 'tech'}" class="ri-code-box-line me-2 text-primary"></i>
+									<i th:if="${category.slug == 'life'}" class="ri-heart-pulse-line me-2 text-danger"></i>
+									<i th:if="${category.slug == 'tips'}" class="ri-lightbulb-line me-2 text-warning"></i>
+									<th:block th:text="${category.name}"></th:block>
+								</span>
+								<i class="ri-arrow-right-s-line"></i>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<!-- Latest Posts -->
+			<div class="card border-0 shadow-sm">
+				<div class="card-header">
+					<h6 class="card-title mb-0"><i class="ri-file-list-3-line me-2"></i>Latest Posts</h6>
+				</div>
+				<div class="card-body">
+					<ul class="list-unstyled mb-0">
+						<li th:each="latestPost : ${latestPosts}" class="mb-3 pb-3 border-bottom" th:if="${latestPost != null and !#strings.isEmpty(latestPost.slug)}">
+							<a th:href="@{/post/{slug}(slug=${latestPost.slug})}" class="text-decoration-none small fw-bold d-block mb-1" th:text="${latestPost.title}"></a>
+							<small class="text-muted">
+								<i class="ri-calendar-line"></i>
+								<th:block th:text="${#temporals.format(latestPost.publishedAt, 'd MMM yyyy')}"></th:block>
+							</small>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<!-- Newsletter (Optional) -->
+			<div class="card border-0 shadow-sm mt-4" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+				<div class="card-body text-center text-white p-4">
+					<i class="ri-mail-line fs-36 mb-3 d-block"></i>
+					<h5 class="text-white mb-2">Stay Updated</h5>
+					<p class="small mb-3">Get the latest posts delivered to your inbox</p>
+					<form class="input-group">
+						<input type="email" class="form-control" placeholder="Your email" required>
+						<button class="btn btn-light" type="submit">
+							<i class="ri-send-plane-fill"></i>
+						</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+</html>
+

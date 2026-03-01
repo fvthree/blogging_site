@@ -1,0 +1,77 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}">
+
+<th:block layout:fragment="pagetitle">
+	<!--page title-->
+	<div th:replace="partials/title-meta :: title-meta('Apex Radar Charts')"></div>
+</th:block>
+
+<head>
+
+</head>
+
+<body>
+	<div layout:fragment="content">
+		<!-- start page title -->
+		<div th:replace="partials/page-title :: page-title('Radar Charts','Apexcharts')"></div>
+
+		<div class="row">
+			<div class="col-xl-6">
+				<div class="card">
+					<div class="card-header">
+						<h4 class="card-title mb-0">Basic Radar Chart</h4>
+					</div><!-- end card header -->
+
+					<div class="card-body">
+						<div id="basic_radar" data-colors='["--vz-success"]' class="apex-charts" dir="ltr"></div>
+					</div><!-- end card-body -->
+				</div><!-- end card -->
+			</div>
+			<!-- end col -->
+
+			<div class="col-xl-6">
+				<div class="card">
+					<div class="card-header">
+						<h4 class="card-title mb-0">Radar Chart - Multiple series</h4>
+					</div><!-- end card header -->
+
+					<div class="card-body">
+						<div id="multi_radar" data-colors='["--vz-danger", "--vz-success", "--vz-primary"]'
+							class="apex-charts" dir="ltr"></div>
+					</div><!-- end card-body -->
+				</div><!-- end card -->
+			</div>
+			<!-- end col -->
+		</div>
+		<!-- end row -->
+		<div class="row">
+			<div class="col-xl-6">
+				<div class="card">
+					<div class="card-header">
+						<h4 class="card-title mb-0">Radar Chart - Polygon Fill</h4>
+					</div><!-- end card header -->
+
+					<div class="card-body">
+						<div id="polygon_radar" data-colors='["--vz-info"]' class="apex-charts" dir="ltr"></div>
+					</div><!-- end card-body -->
+				</div><!-- end card -->
+			</div>
+			<!-- end col -->
+		</div>
+		<!-- end row -->
+	</div>
+
+	<th:block layout:fragment="modal">
+
+	</th:block>
+	<th:block layout:fragment="pagejs">
+		<!-- apexcharts -->
+		<script src="/assets/libs/apexcharts/apexcharts.min.js"></script>
+
+		<!-- radar charts init -->
+		<script src="/assets/js/pages/apexcharts-radar.init.js"></script>
+	</th:block>
+</body>
+
+</html>

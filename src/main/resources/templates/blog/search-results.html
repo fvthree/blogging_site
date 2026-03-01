@@ -1,0 +1,65 @@
+<html lang="en" xmlns="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{blog-layout}">
+
+<th:block>
+	<!--page title-->
+	<div th:replace="partials/title-meta :: title-meta(${pageTitle})"></div>
+</th:block>
+
+<section layout:fragment="content">
+	<div class="row">
+		<div class="col-lg-8">
+			<h1 class="mb-4">Search Results for "<span th:text="${searchQuery}"></span>"</h1>
+
+			<div class="alert alert-info">
+				<p>Search functionality coming soon. Please check back later.</p>
+			</div>
+		</div>
+
+		<!-- Sidebar -->
+		<div class="col-lg-4">
+			<div class="sticky-top" style="top: 20px;">
+				<!-- Categories Widget -->
+				<div class="card mb-4">
+					<div class="card-header bg-light">
+						<h5 class="mb-0">Categories</h5>
+					</div>
+					<div class="card-body">
+						<ul class="list-unstyled">
+							<li th:each="category : ${categories}" class="mb-2">
+								<a th:href="@{/category/{slug}(slug=${category.slug})}"
+									   class="text-decoration-none d-flex justify-content-between align-items-center">
+										<span th:text="${category.name}"></span>
+										<span class="badge bg-secondary" th:text="${category.posts.size()}"></span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+
+					<!-- Latest Posts Widget -->
+					<div class="card">
+						<div class="card-header bg-light">
+							<h5 class="mb-0">Latest Posts</h5>
+						</div>
+						<div class="card-body">
+							<ul class="list-unstyled">
+								<li th:each="post : ${#lists.subList(latestPosts, 0, #lists.size(latestPosts) > 5 ? 5 : #lists.size(latestPosts))}" class="mb-3 pb-3 border-bottom">
+									<a th:href="@{/post/{slug}(slug=${post.slug})}"
+									   class="text-decoration-none text-dark">
+										<small class="d-block font-weight-bold" th:text="${post.title}"></small>
+									</a>
+									<small class="text-muted">
+										<th:block th:text="${#temporals.format(post.publishedAt, 'd MMM yyyy')}"></th:block>
+									</small>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+</html>
+

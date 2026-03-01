@@ -1,0 +1,42 @@
+<html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="sm-hover" data-sidebar-image="none" data-preloader="disable" xmlns="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+	<th:block/>
+	<!-- Page CSS -->
+	<div th:replace="partials/head-css :: head-css"></div>
+	<!-- Blog Custom CSS with Hover Effects -->
+	<link th:href="@{/assets/css/blog-custom.css}" rel="stylesheet" type="text/css">
+</head>
+
+<body data-sidebar="dark" data-layout-mode="light">
+	<div id="layout-wrapper">
+		<!-- No topbar for blog -->
+
+		<!-- No sidebar for blog -->
+
+		<div class="main-content">
+			<div class="page-content">
+				<div class="container-fluid">
+
+					<section layout:fragment="content" th:remove="tag">
+
+					</section>
+				</div>
+			</div>
+			<div th:replace="partials/footer :: footer"></div>
+		</div>
+	</div>
+
+	<th:block layout:fragment="modal" />
+
+	<div th:replace="partials/customizer :: customizer"></div>
+
+	<div th:replace="partials/vendor-scripts :: scripts"></div>
+
+	<th:block layout:fragment="pagejs" />
+	<!-- App js -->
+	<script th:src="@{/assets/js/app.js}"></script>
+</body>
+
+</html>
+

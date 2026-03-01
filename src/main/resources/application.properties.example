@@ -1,0 +1,39 @@
+server.port=8086
+spring.thymeleaf.prefix=classpath:/templates/
+#spring.thymeleaf.check-template-location=false
+
+# Database Configuration - PostgreSQL (Default)
+# Copy this file to application.properties and update with your local settings
+# For local PostgreSQL, make sure PostgreSQL is running on localhost:5432
+# Or use Docker: docker run --name velzon-postgres -e POSTGRES_DB=velzon_blog -e POSTGRES_USER=velzon_user -e POSTGRES_PASSWORD=YOUR_PASSWORD -p 5432:5432 -d postgres:15-alpine
+spring.datasource.url=jdbc:postgresql://localhost:5432/velzon_blog
+spring.datasource.driverClassName=org.postgresql.Driver
+spring.datasource.username=velzon_user
+spring.datasource.password=YOUR_PASSWORD_HERE
+
+# JPA/Hibernate Configuration
+spring.jpa.database-platform=org.hibernate.dialect.PostgreSQL10Dialect
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=false
+spring.jpa.properties.hibernate.format_sql=true
+
+# Connection Pool Configuration
+spring.datasource.hikari.maximum-pool-size=10
+spring.datasource.hikari.minimum-idle=5
+spring.datasource.hikari.connection-timeout=20000
+
+# Blog Configuration
+blog.title=My Awesome Blog
+blog.description=A modern blog platform built with Spring Boot
+
+# Enable actuator for health checks
+management.endpoints.web.exposure.include=health,info
+management.endpoint.health.show-details=always
+
+# Logging
+logging.level.root=INFO
+logging.level.com.velzon=DEBUG
+logging.file.name=logs/blog-app.log
+logging.file.max-size=10MB
+logging.file.max-history=10
+

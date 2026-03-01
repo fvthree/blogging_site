@@ -1,0 +1,42 @@
+# Git
+.git
+.gitignore
+.github
+
+# IDE
+.vscode
+.idea
+*.iml
+*.class
+*.log
+
+# Build
+target/
+build/
+dist/
+*.jar
+*.war
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project specific
+*.swp
+*.swo
+.env
+.env.local
+
+# Logs
+logs/
+*.log
+
+# Node (if using npm)
+node_modules/
+npm-debug.log
+
+# Docker
+docker-compose.override.yml
+.dockerignore
+Dockerfile
+

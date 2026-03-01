@@ -1,0 +1,143 @@
+<html lang="en" xmlns="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{blog-layout}">
+
+<th:block>
+	<!--page title-->
+	<div th:replace="partials/title-meta :: title-meta(${post.title})"></div>
+</th:block>
+
+<section layout:fragment="content">
+	<div class="row">
+		<div class="col-lg-8 mx-auto">
+			<!-- Blog Post Detail -->
+			<article class="blog-post">
+				<!-- Post Meta Info -->
+				<div class="mb-4">
+					<div class="d-flex flex-wrap align-items-center gap-3">
+						<span th:if="${post != null and post.category != null}"
+							  class="badge bg-primary"
+							  th:text="${post.category.name}"></span>
+						<small class="text-muted">
+							<i class="ri-calendar-line"></i>
+							<th:block th:text="${#temporals.format(post.publishedAt, 'd MMM yyyy')}"></th:block>
+						</small>
+						<small class="text-muted">
+							<i class="ri-eye-line"></i>
+							<th:block th:text="${post.viewCount}"></th:block> views
+						</small>
+						<small class="text-muted">
+							<i class="ri-message-2-line"></i>
+							<th:block th:text="${comments.size()}"></th:block> comments
+						</small>
+					</div>
+					<div class="mt-2">
+						<small class="text-muted">
+							<i class="ri-user-line"></i>
+							By <strong class="tech-text-gradient" th:text="${post.author.getFullName()}"></strong>
+						</small>
+					</div>
+				</div>
+
+				<!-- Post Title -->
+				<h1 class="mb-4" th:text="${post.title}"></h1>
+
+				<!-- Featured Image -->
+				<div th:if="${post != null and !#strings.isEmpty(post.featuredImageUrl)}" class="mb-5">
+					<img th:src="${post.featuredImageUrl}" alt="" class="img-fluid rounded shadow-lg" style="max-height: 500px; width: 100%; object-fit: cover;">
+				</div>
+
+				<!-- Post Content -->
+				<div class="post-content mb-5" th:utext="${post.content}"></div>
+
+				<!-- Comments Section -->
+					<div class="comments-section mt-5 pt-5 border-top">
+						<h4 class="mb-4">Comments (<span th:text="${comments.size()}"></span>)</h4>
+
+						<!-- Comments List -->
+						<div th:if="${comments.size() > 0}">
+							<div th:each="comment : ${comments}" class="comment mb-4 pb-4 border-bottom">
+								<div class="d-flex">
+									<div class="flex-shrink-0">
+										<div class="avatar-sm">
+											<div class="avatar-title bg-light text-dark rounded-circle" th:text="${comment.authorName.charAt(0)}"></div>
+										</div>
+									</div>
+									<div class="flex-grow-1 ms-3">
+										<h6 class="mb-1" th:text="${comment.authorName}"></h6>
+										<small class="text-muted">
+											<th:block th:text="${#temporals.format(comment.createdAt, 'd MMM yyyy HH:mm')}"></th:block>
+										</small>
+										<p class="mt-2 mb-0 text-muted" th:text="${comment.content}"></p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div th:unless="${comments.size() > 0}" class="alert alert-info">
+							No comments yet. Be the first to comment!
+						</div>
+
+						<!-- Comment Form -->
+						<div class="comment-form mt-5">
+							<h5 class="mb-4">Leave a Comment</h5>
+							<form method="post" th:action="@{/post/{id}/comment(id=${post.id})}">
+								<div class="row">
+									<div class="col-md-6 mb-3">
+										<label for="authorName" class="form-label">Name</label>
+										<input type="text" class="form-control" id="authorName" name="authorName" required>
+									</div>
+									<div class="col-md-6 mb-3">
+										<label for="authorEmail" class="form-label">Email</label>
+										<input type="email" class="form-control" id="authorEmail" name="authorEmail" required>
+									</div>
+								</div>
+								<div class="mb-3">
+									<label for="content" class="form-label">Comment</label>
+									<textarea class="form-control" id="content" name="content" rows="4" required></textarea>
+									<small class="form-text text-muted">Your comment will be reviewed before posting.</small>
+								</div>
+								<button type="submit" class="btn btn-primary">Submit Comment</button>
+							</form>
+						</div>
+					</div>
+				</article>
+			</div>
+
+		<!-- Sidebar -->
+		<div class="col-lg-4">
+			<!-- Categories -->
+			<div class="card border-0 shadow-sm mb-4">
+				<div class="card-header bg-light border-bottom">
+					<h6 class="card-title mb-0">Categories</h6>
+				</div>
+				<div class="card-body">
+					<ul class="list-unstyled">
+						<li th:each="category : ${categories}" class="mb-2">
+							<a th:href="@{/category/{slug}(slug=${category.slug})}" class="text-decoration-none small" th:text="${category.name}"></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<!-- Latest Posts -->
+			<div class="card border-0 shadow-sm">
+				<div class="card-header bg-light border-bottom">
+					<h6 class="card-title mb-0">Latest Posts</h6>
+				</div>
+				<div class="card-body">
+					<ul class="list-unstyled">
+						<li th:each="latestPost : ${latestPosts}" class="mb-2 pb-2 border-bottom" th:if="${latestPost != null and !#strings.isEmpty(latestPost.slug)}">
+							<a th:href="@{/post/{slug}(slug=${latestPost.slug})}" class="text-decoration-none small" th:text="${latestPost.title}"></a>
+							<br/>
+							<small class="text-muted">
+								<i class="ri-calendar-line"></i>
+								<th:block th:text="${#temporals.format(latestPost.publishedAt, 'd MMM yyyy')}"></th:block>
+							</small>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+</html>
+
