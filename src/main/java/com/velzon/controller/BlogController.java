@@ -6,6 +6,7 @@ import com.velzon.entity.Post;
 import com.velzon.service.CategoryService;
 import com.velzon.service.CommentService;
 import com.velzon.service.PostService;
+import com.velzon.service.NewsletterService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,9 @@ public class BlogController {
 
     @Autowired
     private CommentService commentService;
+
+    @Autowired
+    private NewsletterService newsletterService;
 
     // Blog home - latest posts
     @GetMapping("")
@@ -145,6 +149,42 @@ public class BlogController {
         model.addAttribute("pageTitle", "Search Results");
         logger.debug("Search results page loaded for query: {}", q);
         return "blog/search-results";
+    }
+
+    // Newsletter subscription
+    @PostMapping("/newsletter/subscribe")
+    public String subscribeNewsletter(@RequestParam String email,
+                                     @RequestParam(required = false) String from,
+                                     Model model) {
+        logger.info("Newsletter subscription request for email: {}", email);
+
+        try {
+            newsletterService.subscribe(email);
+            logger.info("Successfully subscribed email: {}", email);
+
+            // Redirect back to the referrer or home page
+            String redirectUrl = (from != null && !from.isEmpty()) ? from : "/";
+            return "redirect:" + redirectUrl + "?subscribed=true";
+        } catch (Exception e) {
+            logger.error("Error subscribing email: {}", email, e);
+            String redirectUrl = (from != null && !from.isEmpty()) ? from : "/";
+            return "redirect:" + redirectUrl + "?subscribed=false";
+        }
+    }
+
+    // Newsletter unsubscribe
+    @PostMapping("/newsletter/unsubscribe")
+    public String unsubscribeNewsletter(@RequestParam String email, Model model) {
+        logger.info("Newsletter unsubscription request for email: {}", email);
+
+        try {
+            newsletterService.unsubscribe(email);
+            logger.info("Successfully unsubscribed email: {}", email);
+            return "redirect:/?unsubscribed=true";
+        } catch (Exception e) {
+            logger.error("Error unsubscribing email: {}", email, e);
+            return "redirect:/?unsubscribed=false";
+        }
     }
 }
 

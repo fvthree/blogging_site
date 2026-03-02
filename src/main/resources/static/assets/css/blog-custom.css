@@ -45,15 +45,15 @@ body {
     padding: 1.5rem 1rem;
     border-radius: 8px;
     margin-bottom: 1rem;
-    background-color: white;
-    border: 1px solid #e9ecef !important;
+    background-color: #F8F3E1;
+    border: 1px solid #E3DBBB !important;
 }
 
 .blog-posts ul li:hover {
-    background-color: #f8f9fa;
+    background-color: #E3DBBB;
     padding-left: 1.5rem;
-    border-left: 4px solid #667eea !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border-left: 4px solid #AEB784 !important;
+    box-shadow: 0 4px 12px rgba(65, 67, 27, 0.12);
     transform: translateY(-2px);
 }
 
@@ -66,9 +66,9 @@ body {
 
 .blog-posts h5 a {
     transition: all 0.3s ease;
-    color: #212529;
+    color: #41431B;
     font-weight: 700;
-    background: linear-gradient(to right, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(to right, #41431B 0%, #AEB784 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -91,7 +91,7 @@ body {
 
 /* Category Badge Styling */
 .badge.bg-primary {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    background: linear-gradient(135deg, #41431B 0%, #AEB784 100%) !important;
     border: none;
     padding: 0.4rem 0.8rem;
     font-weight: 600;
@@ -102,12 +102,12 @@ body {
 
 .blog-posts .badge.bg-primary:hover {
     transform: scale(1.1);
-    box-shadow: 0 4px 8px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 4px 8px rgba(65, 67, 27, 0.3);
 }
 
 /* Read Button Styling */
 .read-btn {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #41431B 0%, #AEB784 100%);
     border: none;
     color: white !important;
     font-weight: 600;
@@ -118,8 +118,8 @@ body {
 
 .read-btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
-    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    box-shadow: 0 6px 16px rgba(65, 67, 27, 0.3);
+    background: linear-gradient(135deg, #AEB784 0%, #41431B 100%);
 }
 
 /* --- SIDEBAR STYLING --- */
@@ -136,7 +136,7 @@ body {
 }
 
 .col-lg-4 .card-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #41431B 0%, #AEB784 100%);
     border-bottom: none;
     border-radius: 12px 12px 0 0 !important;
 }
@@ -157,8 +157,8 @@ body {
 
 .card-body ul.list-unstyled li:hover {
     padding-left: 1rem;
-    background: linear-gradient(90deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.05) 100%);
-    border-left: 3px solid #667eea;
+    background: linear-gradient(90deg, rgba(65, 67, 27, 0.1) 0%, rgba(174, 183, 132, 0.1) 100%);
+    border-left: 3px solid #AEB784;
 }
 
 .card-body ul.list-unstyled li a {
@@ -168,7 +168,7 @@ body {
 }
 
 .card-body ul.list-unstyled li a:hover {
-    color: #667eea;
+    color: #41431B;
     font-weight: 600;
 }
 
@@ -176,7 +176,7 @@ body {
 .blog-post h1 {
     font-size: 2.5rem;
     font-weight: 800;
-    background: linear-gradient(to right, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(to right, #41431B 0%, #AEB784 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -194,20 +194,20 @@ body {
     margin-top: 2rem;
     margin-bottom: 1rem;
     font-weight: 700;
-    color: #667eea;
+    color: #41431B;
 }
 
 .post-content code {
-    background-color: #f5f5f5;
+    background-color: #F8F3E1;
     padding: 0.2rem 0.4rem;
     border-radius: 4px;
-    color: #e83e8c;
+    color: #41431B;
     font-size: 0.9em;
 }
 
 .post-content pre {
-    background-color: #282c34;
-    color: #abb2bf;
+    background-color: #41431B;
+    color: #F8F3E1;
     padding: 1rem;
     border-radius: 8px;
     overflow-x: auto;
@@ -215,7 +215,7 @@ body {
 
 /* --- COMMENTS SECTION --- */
 .comments-section {
-    background-color: #f8f9fa;
+    background-color: #F8F3E1;
     padding: 2rem;
     border-radius: 12px;
 }
@@ -234,7 +234,7 @@ body {
 }
 
 .comment-form .btn-primary {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #41431B 0%, #AEB784 100%);
     border: none;
     padding: 0.75rem 2rem;
     border-radius: 25px;
@@ -244,7 +244,7 @@ body {
 
 .comment-form .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 6px 16px rgba(65, 67, 27, 0.3);
 }
 
 /* --- PAGINATION --- */
@@ -279,11 +279,11 @@ body {
 
 /* --- UTILITY CLASSES --- */
 .tech-gradient {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #41431B 0%, #AEB784 100%);
 }
 
 .tech-text-gradient {
-    background: linear-gradient(to right, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(to right, #41431B 0%, #AEB784 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -291,15 +291,15 @@ body {
 
 /* --- CATEGORY SPECIFIC BADGES --- */
 .tech-badge {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    background: linear-gradient(135deg, #41431B 0%, #AEB784 100%) !important;
 }
 
 .life-badge {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%) !important;
+    background: linear-gradient(135deg, #E3DBBB 0%, #AEB784 100%) !important;
 }
 
 .tips-badge {
-    background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%) !important;
+    background: linear-gradient(135deg, #AEB784 0%, #41431B 100%) !important;
 }
 
 /* --- HERO SECTION --- */

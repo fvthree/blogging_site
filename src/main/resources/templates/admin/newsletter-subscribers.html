@@ -1,0 +1,79 @@
+<html lang="en" xmlns="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+
+<th:block>
+	<!--page title-->
+	<div th:replace="partials/title-meta :: title-meta(${pageTitle})"></div>
+</th:block>
+
+<section layout:fragment="content">
+	<div class="row">
+		<div class="col-12">
+			<div class="card">
+				<div class="card-header d-flex justify-content-between align-items-center">
+					<h5 class="card-title mb-0">
+						<i class="ri-mail-settings-line me-2"></i>Newsletter Subscribers
+					</h5>
+					<span class="badge bg-primary">
+						Total: <span th:text="${totalCount}"></span>
+					</span>
+				</div>
+				<div class="card-body">
+					<div th:if="${subscribers != null and !subscribers.isEmpty()}">
+						<div class="table-responsive">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th style="width: 50px;">ID</th>
+										<th>Email Address</th>
+										<th>Subscribed On</th>
+										<th>Status</th>
+										<th style="width: 100px;">Actions</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="subscriber : ${subscribers}">
+										<td class="fw-bold" th:text="${subscriber.id}"></td>
+										<td th:text="${subscriber.email}"></td>
+										<td>
+											<small class="text-muted">
+												<i class="ri-calendar-line"></i>
+												<th:block th:text="${#temporals.format(subscriber.subscribedAt, 'd MMM yyyy, HH:mm')}"></th:block>
+											</small>
+										</td>
+										<td>
+											<span th:if="${subscriber.isActive}" class="badge bg-success">
+												<i class="ri-check-circle-line"></i> Active
+											</span>
+											<span th:unless="${subscriber.isActive}" class="badge bg-secondary">
+												<i class="ri-close-circle-line"></i> Inactive
+											</span>
+										</td>
+										<td>
+											<form method="POST" th:action="@{/admin/newsletter/{id}/unsubscribe(id=${subscriber.id})}"
+												  style="display: inline;"
+												  onsubmit="return confirm('Are you sure you want to unsubscribe this email?');">
+												<button type="submit" class="btn btn-sm btn-danger" title="Unsubscribe">
+													<i class="ri-close-line"></i>
+												</button>
+											</form>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div th:if="${subscribers == null or subscribers.isEmpty()}" class="alert alert-info border-0">
+						<div class="text-center py-4">
+							<i class="ri-mail-open-line fs-48 text-primary mb-3 d-block"></i>
+							<h5>No Newsletter Subscribers Yet</h5>
+							<p class="mb-0">Subscribers will appear here once they sign up from the blog.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+</html>
+

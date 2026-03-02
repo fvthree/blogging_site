@@ -136,17 +136,24 @@
 			</div>
 
 			<!-- Newsletter (Optional) -->
-			<div class="card border-0 shadow-sm mt-4" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+			<div class="card border-0 shadow-sm mt-4" style="background: linear-gradient(135deg, #41431B 0%, #AEB784 100%);">
 				<div class="card-body text-center text-white p-4">
 					<i class="ri-mail-line fs-36 mb-3 d-block"></i>
 					<h5 class="text-white mb-2">Stay Updated</h5>
 					<p class="small mb-3">Get the latest posts delivered to your inbox</p>
-					<form class="input-group">
-						<input type="email" class="form-control" placeholder="Your email" required>
+					<form method="POST" th:action="@{/newsletter/subscribe}" class="input-group">
+						<input type="email" name="email" class="form-control" placeholder="Your email" required>
+						<input type="hidden" name="from" th:value="${#httpServletRequest.requestURI}">
 						<button class="btn btn-light" type="submit">
 							<i class="ri-send-plane-fill"></i>
 						</button>
 					</form>
+					<small class="mt-2 d-block opacity-75" th:if="${param.subscribed != null}">
+						<i class="ri-check-line"></i> Thanks for subscribing!
+					</small>
+					<small class="mt-2 d-block opacity-75 text-warning" th:if="${param.subscribed == 'false'}">
+						<i class="ri-alert-line"></i> Could not subscribe. Please try again.
+					</small>
 				</div>
 			</div>
 		</div>
